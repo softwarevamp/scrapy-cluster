@@ -207,7 +207,7 @@ class DistributedScheduler(object):
         # new config could have loaded between scrapes
         newConf = self.check_config()
 
-        self.queue_keys = self.redis_conn.keys(self.spider.name + ":*:queue")
+        self.queue_keys = list(map(lambda x: x.decode(), self.redis_conn.keys(self.spider.name + ":*:queue")))
 
         for key in self.queue_keys:
             # build final queue key, depending on type and ip bools
@@ -282,7 +282,7 @@ class DistributedScheduler(object):
         try:
             obj = urllib.request.urlopen(settings.get('PUBLIC_IP_URL',
                                   'http://ip.42.pl/raw'))
-            results = self.ip_regex.findall(obj.read())
+            results = self.ip_regex.findall(obj.read().decode())
             if len(results) > 0:
                 self.my_ip = results[0]
             else:

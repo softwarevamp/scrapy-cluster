@@ -408,7 +408,7 @@ class RedisMonitor(object):
         keys = self.redis_conn.keys('stats:crawler:*:*:*')
         for key in keys:
             # we only care about the spider
-            elements = key.split(":")
+            elements = key.decode().split(":")
             spider = elements[3]
 
             if spider not in spiders:
@@ -458,7 +458,7 @@ class RedisMonitor(object):
         keys = self.redis_conn.keys('*:*:queue')
         total_backlog = 0
         for key in keys:
-            elements = key.split(":")
+            elements = key.decode().split(":")
             spider = elements[0]
             domain = elements[1]
             spider = 'queue_' + spider

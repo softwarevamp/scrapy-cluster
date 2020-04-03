@@ -88,7 +88,7 @@ class LogCallbackMixin:
             else:
                 cb(log_message, log_extra)
 
-class LogObject(object, LogCallbackMixin):
+class LogObject(LogCallbackMixin):
     '''
     Easy wrapper for writing json logs to a rotating file log
     '''

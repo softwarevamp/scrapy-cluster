@@ -109,6 +109,7 @@ class KafkaPipeline(object):
 
         try:
             producer = KafkaProducer(bootstrap_servers=settings['KAFKA_HOSTS'],
+                                 value_serializer=lambda m: m.encode(),
                                  retries=3,
                                  linger_ms=settings['KAFKA_PRODUCER_BATCH_LINGER_MS'],
                                  buffer_memory=settings['KAFKA_PRODUCER_BUFFER_BYTES'])

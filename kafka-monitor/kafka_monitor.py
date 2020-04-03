@@ -453,6 +453,7 @@ class KafkaMonitor(object):
 
             return KafkaConsumer(
                 self.settings['KAFKA_INCOMING_TOPIC'],
+                value_deserializer=lambda m: m.decode(),
                 group_id=self.settings['KAFKA_GROUP'],
                 bootstrap_servers=brokers,
                 consumer_timeout_ms=self.settings['KAFKA_CONSUMER_TIMEOUT'],
@@ -478,7 +479,7 @@ class KafkaMonitor(object):
                                str(brokers))
 
             return KafkaProducer(bootstrap_servers=brokers,
-                                 value_serializer=lambda m: json.dumps(m),
+                                 value_serializer=lambda m: json.dumps(m).encode(),
                                  retries=3,
                                  linger_ms=self.settings['KAFKA_PRODUCER_BATCH_LINGER_MS'],
                                  buffer_memory=self.settings['KAFKA_PRODUCER_BUFFER_BYTES'])
