@@ -290,7 +290,7 @@ class LogObject(object, LogCallbackMixin):
         elif level == 'WARNING':
             self.logger.warning(message)
         elif level == 'ERROR':
-            self.logger.error(message)
+            self.logger.exception(message)
         elif level == 'CRITICAL':
             self.logger.critical(message)
         else:
