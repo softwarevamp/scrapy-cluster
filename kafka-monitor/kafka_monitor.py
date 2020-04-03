@@ -416,7 +416,7 @@ class KafkaMonitor(object):
 
         @param json_item: The loaded json object
         '''
-        @MethodTimer.timeout(self.settings['KAFKA_FEED_TIMEOUT'], False)
+#         @MethodTimer.timeout(self.settings['KAFKA_FEED_TIMEOUT'], False)
         def _feed(json_item):
             producer = self._create_producer()
             topic = self.settings['KAFKA_INCOMING_TOPIC']
